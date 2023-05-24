@@ -3,13 +3,13 @@ Esercitazione python data intelligence experis academy
 
 I componenti del gruppo sono 
 
-- Bassi Stefano (Ueloiol)
+- Bassi Stefano (Ueloiol) (https://github.com/Ueloiol)
 
-- Alessandra Rispoli (Alerisp94)
+- Alessandra Rispoli (Alerisp94) (https://github.com/alerisp94)
 
-- Nicola Pacella (Pach90)
+- Nicola Pacella (Pach90) (https://github.com/pach91)
 
-- Bruno Vincenzo (Vinx9898) (leader in senso lato)
+- Bruno Vincenzo (Vinx9898) (leader in senso lato)  (https://github.com/Vinx989)
 
 ### Il file python è Abstraction_final.py
 
