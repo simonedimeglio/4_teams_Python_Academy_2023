@@ -1,5 +1,5 @@
 # Team 1
-Membri: Manuel Murtas, Madalina Sfirlog, Eleonora Zarrilli, Daniele Cuomo
+Membri: Manuel Murtas (https://github.com/ManuelMurtas3), Madalina Sfirlog (https://github.com/MadalinaSfirlog), Eleonora Zarrilli (https://github.com/EleonoraZarr), Daniele Cuomo (https://github.com/DaniCuomo)
 
 # Processo di sviluppo
 Ogni membro del gruppo scrive le porzioni di codice ad esso assegnate in un branch personale.
