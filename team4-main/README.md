@@ -11,6 +11,8 @@ I componenti del gruppo sono
 
 - Bruno Vincenzo (Vinx9898) (leader in senso lato)
 
+Il file python è Abstraction_final.py
+
 # Progetto
 
 Il progetto prevede la costruzione di un social network dove e' possinile registrarsi, creare un post, commentare un post e aggiungere followers
