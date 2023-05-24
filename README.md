@@ -3,20 +3,29 @@
 <br><br>
 Welcome to the Python Academy Projects repository!<br>This repository showcases the incredible work of our talented students who have completed four amazing Python projects. Each project is stored in a separate folder within this repository
 
+<br>
 
-1. **Project 1: RPG SIMULATION**
+![team-1](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/4c68ce34-86c7-4c95-9281-c2e281e17e4b)
+**Project 1: RPG SIMULATION**
 
    Description: Python project that allows you to play a role-playing game. 
 
-2. **Project 2: HUMAN RESOURCE MANAGEMENT APP**
+<br>
+
+![team-2](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/000b1113-624a-4164-9958-6ab774743f9e)
+**Project 2: HUMAN RESOURCE MANAGEMENT APP**
 
    Description: The python code of this project simulates a human resource management application. 
-   
-3. **Project 3: TO-DO LIST**
+   <br>
+
+![team-3](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/e62315dc-1c7c-4b43-9183-cfbacae543ea)
+**Project 3: TO-DO LIST**
 
    Description: Simulation of a task management system.    
-   
-4. **Project 4: PYTHON SOCIAL NETWORK**
+      <br>
+
+![team-4](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/8fbdf9dd-6191-424f-9d78-c5ae874c9455)
+**Project 4: PYTHON SOCIAL NETWORK**
 
    Description: Simulation of a social network entirely made in python.      
    
@@ -29,12 +38,6 @@ Welcome to the Python Academy Projects repository!<br>This repository showcases 
 
 <br>
 <br>
-   
-## 4 Teams
-![team-1](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/4c68ce34-86c7-4c95-9281-c2e281e17e4b)
-![team-2](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/000b1113-624a-4164-9958-6ab774743f9e)
-![team-3](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/e62315dc-1c7c-4b43-9183-cfbacae543ea)
-![team-4](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/8fbdf9dd-6191-424f-9d78-c5ae874c9455)
 
 ## License
 
