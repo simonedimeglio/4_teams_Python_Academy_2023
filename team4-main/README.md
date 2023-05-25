@@ -9,7 +9,7 @@ I componenti del gruppo sono
 
 - Nicola Pacella (Pach90) (https://github.com/pach91)
 
-- Bruno Vincenzo (Vinx9898) (leader in senso lato) (https://github.com/Vinx989)
+- Bruno Vincenzo (Vinx9898) (https://github.com/Vinx989)
 
 # Progetto
 
@@ -21,15 +21,15 @@ Il progetto contiene due classi che servono per la creazione dell'utente e delle
 Un metodo principale, AbstractionAccess, che è il main del progetto. Nello script è presente anche un metodo che gestisce la registazione la social.
 Infine troviamo un metodo che funge da menù per l'utente una volta entrato in Abstraction.
 
-### lista_utenti_oggetto - 
-Contiene la lista degli utenti, dove per ogni utente vengono consrvate tutte le informazioni primarie, amici e post
+### lista_utenti_oggetto 
+Contiene la lista degli utenti, dove per ogni utente vengono conservate tutte le informazioni primarie, amici e post
 
-### classe Utente - 
-Contiene le funzioni principali crea/cancella post e follow/unfollow amici. Elementi una volta creati vengono aggiunti
+### classe Utente 
+Contiene le funzioni principali crea/cancella post, commenta post, stampa profilo, visualizza lista amici e follow/unfollow amici. Gli elementi una volta creati vengono aggiunti
 alla lista_utenti_oggetto
 
 ### classe Post
-E' la classe che viene utilizzare per crear i post degli utenti
+E' la classe che viene utilizzata per creare i post degli utenti
 
 ### AbstractionAccess 
 Questo è il main del programma. Qui si accede all'entry/exit point e si può scegliere se registrarsi, oppure accedere al proprio profilo se esistente.
@@ -41,15 +41,9 @@ Software Abstraction lato utente. Questo metodo include tutte le funzionalità a
 Metodo utilizzato per l'istanza di Oggetti Utente in Abstraction. Questo metodo permette di registrare un nuovo utente al social network
 
 # Road map
-Dopo la release Abstraction 1.0 è previsto un upgrade di alcune funzionalità di sotto elencate.
-- Sistema di controllo sulla lunghezza e i carattare da inserire nella password
-- Sistema di salvataggio ad ogni uscita dal programma
-- Inserire allert di assenza amici
-
-La data di release Astraction 1.1 è prevista per il 25/05/2023
 
 ### Astraction 2.0
-Alla versione 1.1 del programma Astraction seguirà un upgrade che prevede la possibilità di gestire e stabilire la gerarchia delle amicizie( amici stretti, grado di parentela). In questa versione sarà possibile gestire la visione dei post nell'home-page in base alla gerarchia delle amicizie.
+Alla versione 1.0 del programma Astraction seguirà un upgrade che prevede la possibilità di gestire e stabilire la gerarchia delle amicizie( amici stretti, grado di parentela). In questa versione sarà possibile gestire la visione dei post nell'home-page in base alla gerarchia delle amicizie.
 
 La data di release Astraction 2.0 è prevista per il 26/05/2023
 
@@ -57,6 +51,7 @@ La data di release Astraction 2.0 è prevista per il 26/05/2023
 
 In segutio verranno aggiunte le seguenti funzionalità che faranno riferimento ad una versione 2.1:
 
+- Sistema di controllo sulla lunghezza e i carattare da inserire nella password
 - reaction ai post
 - ricondivisione dei post
 - Indicatore di popolarità. Rendere visibile i like ricevuti, i folowers ed il numero dei post pubblicati
@@ -68,9 +63,10 @@ La release della verisone 2.1 è prevista per il 31/05/2023
 
 In segutio verranno aggiunte le seguenti funzionalità che faranno riferimento ad una versione 2.2:
 
-- bloccao di utenti che possono visualizzare il tuo profilo
+- blocco di utenti che possono visualizzare il tuo profilo
 - Inserimento di immagini nei post
 - Possibilità di segnalare post offensivi
+- Sistema di salvataggio dati ad ogni uscita dal programma
 - Impostare un profilo pubblico/privato
 - Inserire la possibilità di verificare il profilo (bollino blue)
 
@@ -91,7 +87,7 @@ Il file è in formato pdf
 
 # Strutturazione del lavoro
 
-La totalità del proggetto è stato affrontano in gruppo. Per la maggior parte il lavoro è stato svolto in modalità "scrittura collettiva"
+La maggior parte del proggetto è stato affrontano in gruppo. Per la maggior parte il lavoro è stato svolto in modalità "scrittura collettiva"
 dove tutti i menbri del gruppo hanno partecipato. Di seguito è riportata la strutturazione del lavoro:
 
 1- ANALIZZARE PROBLEMA: Cercare di capire in quanti blocchi è suddivisibile il problema. (to do list)

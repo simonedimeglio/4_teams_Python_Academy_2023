@@ -51,20 +51,26 @@ class Utente:
     # metoto per visualizzare i post pubblicati dall'Utente stesso (Come se fosse il proprio profilo)
     def stampa_home(self):
         print(f'{self.username} home page!')
+        
         for i in range(len(self.homepage_utente)):
             print(i, ':', self.homepage_utente[i].post_stesso)
+            
             if self.homepage_utente[i].lista_commenti_al_Post == []:
                 print()
             else:
-                print(self.homepage_utente[i].lista_commenti_al_Post)
+                for j in range(len(self.homepage_utente[i].lista_commenti_al_Post)):
+                    print(self.homepage_utente[i].lista_commenti_al_Post[j][0], ': ',self.homepage_utente[i].lista_commenti_al_Post[j][1] )
                 print()
 
     # Metodo per visualizzare le persone seguite dall'Utente
     def stampa_amici(self):
         print(f'{self.username} amici!\n')
-        for i in range(len(self.amici_utente)):
-            print(i, ':', self.amici_utente[i])
-            print()
+        if self.amici_utente == []:
+            print('Al momento non segui nessuno! \n')
+        else:
+            for i in range(len(self.amici_utente)):
+                print(i, ':', self.amici_utente[i])
+                print()
 
     # Metodo per creare un post. Questo metodo è richiamato nel main del programma,
     # ovvero in Abstraction()
@@ -103,22 +109,25 @@ class Utente:
             print(self.amici_utente)
             print()
         else:
-            print('Questo utente non esiste')
+            print('Questo utente non esiste.')
             print()
 
     # Metodo per rimuovere un utente dalla lista dei "seguiti" (following)
     # Questo metodo è richiamato nel main del programma, ovvero in Abstraction()
     def un_following(self):
-        try:
-            for i in range(len(self.amici_utente)):
-                print(i, ':', self.amici_utente[i])
-            exAmico = input("Inserisci il nome dell'utente che non vuoi più seguire: ")
-            self.amici_utente.remove(exAmico)
-            print(self.amici_utente)
-            print()
-        except:
-            print("L'utente non è nella tua lista di amici")
-            print()
+        if self.amici_utente == []:
+            print('Al momento non segui nessun utente! \n')
+        else:
+            try:
+                for i in range(len(self.amici_utente)):
+                    print(i, ':', self.amici_utente[i])
+                exAmico = input("Inserisci il nome dell'utente che non vuoi più seguire: ")
+                self.amici_utente.remove(exAmico)
+                print(self.amici_utente)
+                print()
+            except:
+                print("L'utente non è nella tua lista di amici")
+                print()
 
     # Per commentare un post di un Utente registrato in Abstract(), anche i tuoi stessi post
     # Questo metodo è richiamato nel main del programma, ovvero in Abstraction()
@@ -126,7 +135,7 @@ class Utente:
         for i in range(len(utenteX.homepage_utente)):
             print(i, ':', utenteX.homepage_utente[i].post_stesso)
             for j in utenteX.homepage_utente[i].lista_commenti_al_Post:
-                print(j)
+                print(j[0], ': ', j[1])
 
         try:
             index_post = int(input("Digita l'indice del post da commentare: "))
@@ -138,7 +147,7 @@ class Utente:
 
             print(utenteX.homepage_utente[index_post].post_stesso)
             for j in utenteX.homepage_utente[index_post].lista_commenti_al_Post:
-                print(j, '\n')
+                print(j[0], ': ', j[1])
             print()
 
         except:
@@ -203,16 +212,21 @@ def Registrazione():
 # Questo metodo include tutte le funzionalità a cui l'utente può accedere
 # I funzionalità sono state dichiarati nella class User
 def Abstraction(NumeroUtente):
-    print(f'Salve, numero utente {lista_utenti_oggetto[NumeroUtente].username}, scegli cosa vuoi fare')
+    
 
     inAbstraction = True
     while inAbstraction:
-        print('0. Per accedere con un altro account')
+        print(f'Salve {lista_utenti_oggetto[NumeroUtente].username}, scegli cosa vuoi fare: \n')
+        
+        print('0. Per accedere con un altro account \n')
+        
         print('1. Pubblica un Post')
         print('2. Cancella un Post')
-        print('3. Commenta un Post')
+        print('3. Commenta un Post\n')
+        
         print('4. Aggiungi Amici')
-        print('5. Rimuovi Amici')
+        print('5. Rimuovi Amici \n')
+
         print('6. Vai al tuo profilo')
         print('7. Lista utenti che segui \n')
 
