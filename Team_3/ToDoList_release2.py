@@ -69,11 +69,7 @@ class Task:
         
     # Modifica di priorita (nella modifica parziale)
     def update_priorita(self, valore):
-        # controlla che il valore sia nei valori concessi
-        if valore in ['Alta', 'Media', 'Bassa']:
-            self.priorita = valore
-        else:
-            print('Non è stato possibile modificare la priorità del task.')
+        self.priorita = valore
 
     # Modifica del contenuto della task (nella modifica parziale)
     def update_contenuto(self, nuovo_contenuto):
