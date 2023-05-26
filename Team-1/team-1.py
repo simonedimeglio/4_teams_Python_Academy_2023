@@ -1,6 +1,6 @@
-# Classe Entità: base per tutti i personaggi. Vedere documentazione (README.md)
 import random
 
+# Classe Entità: base per tutti i personaggi. Vedere documentazione (README.md)
 class Entita:
     def __init__(self, livello, nome, tipo):
         self.livello = livello
@@ -13,6 +13,7 @@ class Entita:
         self.punti_vita_correnti = 1 #punti vita correnti
         self.punti_esperienza_correnti = 0 #punti esperienza correnti
         self.abilita_attivata = False #indica se l'abilità dell'entità è già stata utilizzata nel combattimento corrente
+        self.lista_strumenti = []
 
     def attacca(self):
         #ritorna un numero casuale tra 0 e il valore massimo di attacco durante il combattimento
@@ -68,11 +69,23 @@ class Entita:
         return f"{self.nome} | HP {self.punti_vita_correnti} su {self.punti_vita}"
     
     def attiva_abilita(self, nemico):
+        #attivazione abilita
         self.abilita_attivata = True
         return "Abilità attivata"
     
     def rigenera_abilita(self):
+        #rigenerazione abilita dopo l'eventuale utilizzo
         self.abilita_attivata = False
+    
+    def aggiungi_strumento(self, strumento):
+        #aggiunta strumento alla lista strumenti
+        self.lista_strumenti.append(strumento)
+
+    def utilizza_strumento(self, indice_strumento, nemico):
+        #utilizzo ed eliminazione di uno strumento
+        strumento = self.lista_strumenti[indice_strumento]
+        print(strumento.attiva_strumento(self, nemico))
+        self.lista_strumenti.pop(indice_strumento)
 
 class Drago(Entita):
     def __init__(self, livello, nome):
@@ -187,6 +200,38 @@ class Samurai(Entita):
             nemico.difesa -= int(nemico.difesa * 0.05)
             return super().attiva_abilita(nemico) + f" - La difesa di {nemico.nome} è stata ridotta del 5%.\n"
         return "Abilità non attivabile. È già stata attivata.\n"
+
+#Classe strumento: base per tutti i strumenti
+class Strumento:
+    def __init__(self, nome, descrizione):
+        self.nome = nome #nome dello strumento
+        self.descrizione = descrizione #breve descrizione dello strumento
+    
+    def attiva_strumento(self, personaggio, nemico):
+        #attivazione dello strumento
+        return f"Strumento {self.nome} attivato"
+    
+    def to_string(self):
+        #resoconto dello strumento
+        return f"Strumento {self.nome}: {self.descrizione}"
+
+class PozioneCura(Strumento):
+    def __init__(self):
+        super().__init__("Pozione cura", "Permette di recuperare 10 punti vita.")
+    
+    def attiva_strumento(self, personaggio, nemico):
+        #incrementa la vita del personaggio di 10 punti vita
+        personaggio.punti_vita_correnti = min(personaggio.punti_vita_correnti + 10, personaggio.punti_vita)
+        return super().attiva_strumento(personaggio, nemico)
+
+class PozioneDanno(Strumento):
+    def __init__(self):
+        super().__init__("Pozione danno", "Permette di infliggere un danno di 10 punti vita.")
+    
+    def attiva_strumento(self, personaggio, nemico):
+        #decrementa la vita dell'avversario di 10 punti vita
+        nemico.prendi_danno(10)
+        return super().attiva_strumento(personaggio, nemico)
 
 #programma
 
@@ -305,15 +350,20 @@ def switch_gioco(personaggio):
         if scelta == "1":
             print ("Combatti\n")
             #combattimento
-            combattimento(personaggio)
-            
+
+            #generazione nemico
+            nemico = genera_nemico(personaggio.livello)
+
+            #gestione del combattimento
+            switch_combattimento(personaggio, nemico)
+                   
         elif scelta == "2":
             #stampa delle statistiche correnti del personaggio
             print ("STATISTICHE PERSONAGGIO: \n")
             print(personaggio.stampa_statistiche())
         
         elif scelta == "0":
-
+            #uscita dal gioco
             print("Sei sicuro di voler uscire dal gioco?")
             print("1. Conferma l'uscita dal gioco")
             print("2. Ritorna nel gioco")
@@ -331,8 +381,10 @@ def switch_gioco(personaggio):
                 #rimanere nel gioco
                 print("Sei rimasto nel gioco, buon divertimento!\n") 
             else:
+                #opzione inesistente
                 print("L'opzione da te inserita non è corretta, riprova.\n")
         else:
+            #opzione inesistente
             print("L'opzione da te inserita non è corretta, riprova.\n")
 
 def genera_nemico(livello):
@@ -350,71 +402,194 @@ def genera_nemico(livello):
         #samurai
         return Samurai(random.randint(max(livello - 1, 1), livello + 1), "Samurai")
 
-def prova_abilita(personaggio, nemico, turno):
-    #funzione per l'attivazione dell'abilità del personaggio o del nemico in base al turno
-    abilita = random.randint(1,2)
-    if abilita == 1:
-        if turno == True:
-            print(personaggio.attiva_abilita(nemico))
-        else:
-            print(nemico.attiva_abilita(personaggio))
+def genera_strumento():
+    #generazione di uno strumento (50% di probabilità)
+    numero_strumento = random.randint(1, 4)
+    if numero_strumento == 1:
+        #pozione cura (25%)
+        return PozioneCura()
+    elif numero_strumento == 2:
+        #pozione danno (25%)
+        return PozioneDanno()
+    else:
+        #nessuno strumento (50%)
+        return None
 
-def combattimento(personaggio):
-    #gestione combattimento
-    #generazione nemico
-    nemico = genera_nemico(personaggio.livello)
-
-    turno_personaggio = True #booleana che indica di chi è il turno (true personaggio, false nemico)
-
+def switch_combattimento(personaggio, nemico):
+    #menu di combattimento
     print("Hai incontrato un nemico!\n")
     print(nemico.stampa_statistiche() + "\n") #mostra le statistiche del nemico
 
     turno = 0
 
-    while not personaggio.sconfitto() and not nemico.sconfitto(): #finchè qualcuno non è stato sconfitto
+    while not personaggio.sconfitto() and not nemico.sconfitto():
         turno += 1
         print(f"Turno {turno}\n")
-        if turno_personaggio: #turno del personaggio
-            
-            #richiamiamo (col 50% di probabilità) l'esecuzione dell'abilità del personaggio o del nemico
-            prova_abilita(personaggio, nemico, turno_personaggio)
 
-            #calcolo di attacco personaggio, difesa nemico e della loro differenza
-            attacco = personaggio.attacca()
-            difesa = nemico.difende()
-            print(f"{personaggio.nome}: ATK -> {attacco}")
-            print(f"Nemico: DEF -> {difesa}")
-            combattimento = attacco - difesa 
+        print("Benvenuto nel menu Combattimento. \nScegliere l'opzione desiderata")
+        print("1. Combatti")
+        print("2. Usa abilita")
+        print("3. Usa strumento")
+        print("4. Fuggi")
+       
+        scelta = input("Inserisci la tua scelta: ")
+        print()
 
-            if combattimento > 0:
-                #attacco efficace, sottraggo la vita al nemico
-                print(f"{personaggio.nome}: datto inflitto -> {combattimento}")
-                nemico.prendi_danno(combattimento)
+        if scelta == "1":
+            #l'utente vuole combattere
+            print("1. Combatti")
+            print("2. Torna al menu")
+           
+            scelta = input("Inserisci la tua scelta: ")
+            print()
+           
+            if scelta == "2":
+                #conferma il ritorno al Menù Combattimento
+                print("Sei tornato al menù combattimento\n")
+           
+            elif scelta == "1":
+                #esecuzione di un doppio turno di combattimentos
+                combattimento(personaggio, nemico, turno)
+                turno += 1
+                
             else:
-                #attacco non efficace
-                print(f"{personaggio.nome}: l'attacco era troppo debole")
+                #opzione inesistente
+                print("L'opzione da te inserita non è corretta, riprova.\n")
 
-            turno_personaggio = False #cambio turno
+        elif scelta == "2":
+            # richiesta uso abilita
+            print("Hai scelto di utilizzare la tua abilità")
+            print("1. Utilizza la tua abilità ")
+            print("2. Torna al menu")
 
-        else: #turno nemico
-            #calcolo di attacco nemico, difesa personaggio e della loro differenza
-            prova_abilita(personaggio, nemico, turno_personaggio)
+            scelta = input("Inserisci la tua scelta: ")
+            print()
 
-            attacco = nemico.attacca()
-            difesa = personaggio.difende()
-            print(f"Nemico: ATK -> {attacco}")
-            print(f"{personaggio.nome}: DEF -> {difesa}")
-            combattimento = attacco - difesa 
+            #richiamo funzione abilità
+            if scelta == "1":
+                #gestione abilita
+                print(personaggio.attiva_abilita(nemico))
 
-            if combattimento > 0:
-                #attacco efficace, sottraggo vita al personaggio
-                print(f"Nemico: datto inflitto -> {combattimento}")
-                personaggio.prendi_danno(combattimento)
+            elif scelta == "2":
+               #torna al menu combattimento
+               print("Sei tornato al menù combattimento\n")
+
             else:
-                #attacco non efficace
-                print("Nemico: l'attacco era troppo debole\n")
-            
-            turno_personaggio = True #cambio turno
+                #opzione inesistente
+                print("L'opzione da te inserita non è corretta, riprova.\n")
+
+
+        elif scelta == "3":
+            print("Hai scelto di utilizzare il tuo strumento")
+            print("1. Utilizza uno strumento")
+            print("2. Torna al menu")
+       
+            scelta = input("Inserisci la tua scelta: ")
+            print()
+
+            if scelta == "1":
+                #utilizza strumento
+                if personaggio.lista_strumenti == []:
+                    print("Non possiedi alcuno strumento\n")
+                else:
+                    opzione = 1
+                    for strumento in personaggio.lista_strumenti:
+                        print(f"{opzione}. {strumento.nome}")
+                        opzione += 1
+                    print(f"0. Nessuno strumento")
+                    
+                    indice_strumento = int(input("Scegli lo strumento da utilizzare: "))
+                    if indice_strumento > 0 and indice_strumento <= len(personaggio.lista_strumenti):
+                        personaggio.utilizza_strumento(indice_strumento - 1, nemico)
+                        print(personaggio.stampa_stato())
+                        print(nemico.stampa_stato())
+                    else:
+                        print("L'opzione da te inserita non è corretta, riprova.\n")
+
+            elif scelta == "2":
+               print("Sei tornato al menù combattimento\n")
+
+            else:
+                #opzione inesistente
+                print("L'opzione da te inserita non è corretta, riprova.\n")
+
+       
+        elif scelta == "4":
+            #menu fuga
+            print("Hai scelto di fuggire")
+            print("1. Conferma fuga")
+            print("2. Torna al menu")
+
+            scelta = input("Inserisci la tua scelta: ")
+            print()
+
+            if scelta == "1":
+                #fuga confermata
+                print("Hai scelto di fuggire, fuggi!\n")
+                break
+           
+            elif scelta == "2":
+               #fuga annullata
+               print("Sei tornato al menù combattimento\n")
+
+            else:
+                #opzione inesistente
+                print("L'opzione da te inserita non è corretta, riprova.\n")
+
+        else:
+            #errore, opzione inesistente
+            print("L'opzione da te inserita non è corretta, riprova.\n")
+    
+    if personaggio.sconfitto():
+        #personaggio sconfitto
+        print("Mi dispiace, sei stato sconfitto\n")
+    elif nemico.sconfitto():
+        #personaggio vittorioso
+        print("Congratulazioni, hai sconfitto il nemico\n")
+        personaggio.guadagna_xp(nemico.livello) #aggiunta xp della battaglia
+        strumento = genera_strumento() #viene generato un eventuale strumento come drop del nemico
+        if strumento != None:
+            #aggiunta dello strumento alla nostra lista di strumenti
+            personaggio.aggiungi_strumento(strumento)
+            print("Hai guadagnato uno strumento!")
+            print(strumento.to_string())
+        print()
+
+    personaggio.rigenera_salute() #il personaggio rigenera salute alla fine di ogni combattimento
+    personaggio.rigenera_abilita() #rigeneriamo la possibilità di utilizzare l'abilità al prossimo combattimento
+
+def combattimento(personaggio, nemico, turno):
+
+        #calcolo di attacco personaggio, difesa nemico e della loro differenza
+        attacco = personaggio.attacca()
+        difesa = nemico.difende()
+        print(f"{personaggio.nome}: ATK -> {attacco}")
+        print(f"Nemico: DEF -> {difesa}")
+        combattimento = attacco - difesa 
+
+        if combattimento > 0:
+            #attacco efficace, sottraggo la vita al nemico
+            print(f"{personaggio.nome}: datto inflitto -> {combattimento}")
+            nemico.prendi_danno(combattimento)
+        else:
+            #attacco non efficace
+            print(f"{personaggio.nome}: l'attacco era troppo debole")
+
+        print(f"\nTurno {turno + 1}\n")
+
+        attacco = nemico.attacca()
+        difesa = personaggio.difende()
+        print(f"Nemico: ATK -> {attacco}")
+        print(f"{personaggio.nome}: DEF -> {difesa}")
+        combattimento = attacco - difesa 
+
+        if combattimento > 0:
+            #attacco efficace, sottraggo vita al personaggio
+            print(f"Nemico: datto inflitto -> {combattimento}")
+            personaggio.prendi_danno(combattimento)
+        else:
+            #attacco non efficace
+            print("Nemico: l'attacco era troppo debole\n")
 
         #recap stato corrente di personaggio e nemico
         print(personaggio.stampa_stato())
@@ -422,16 +597,5 @@ def combattimento(personaggio):
         print()
 
     #termine battaglia
-    if personaggio.sconfitto():
-        #personaggio sconfitto
-        print("Mi dispiace, sei stato sconfitto\n")
-    else:
-        #personaggio vittorioso
-        print("Congratulazioni, hai sconfitto il nemico\n")
-        personaggio.guadagna_xp(nemico.livello) #aggiunta xp della battaglia
-        print()
-
-    personaggio.rigenera_salute() #il personaggio rigenera salute alla fine di ogni combattimento
-    personaggio.rigenera_abilita() #rigeneriamo la possibilità di utilizzare l'abilità al prossimo combattimento
 
 switch() #ingresso nel programma
