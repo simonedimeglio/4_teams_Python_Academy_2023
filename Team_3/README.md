@@ -1,4 +1,4 @@
-# teamWork_experis2023
+# Experis Academy 2023 - DATA INTELLIGENCE - TeamWork
 ![team-3](https://github.com/simonedimeglio/4_teams_Python_Academy_2023/assets/78272736/e62315dc-1c7c-4b43-9183-cfbacae543ea)
 **Project 3: TO-DO LIST**
 
@@ -14,34 +14,34 @@ MEMBRI DEL TEAM 3: <br>
 DI APP GESTIONE TASK CON SERVIZI CRUD**
 
 
-REGOLE DI GRUPPO
+# REGOLE DI GRUPPO
 
-1. COORDINAMENTO INTERNO:
+1. **COORDINAMENTO INTERNO:**
   - requisiti individuale preliminare e brainstorming collettivo;
   - pianificazione del tempo durante il brainstorming;
   - pianificazione delle task urgenti;
   - comunicazioni agili eliminando barriere gerarchiche con il massimo rispetto reciproco;
   - gestione dello sprint in base alle tempistiche con assegnazione task.
 
-2. COMMIT ON GITHUB:
+2. **COMMIT ON GITHUB:**
   - pull a inizio lavoro, con file separati;
   - push dei file personali sulla cartella condivisa ogni aggiornamento importante;
   - il teamleader, o chi per sua vece, ha l'onere di unire i file compositi;
   - le cancellazioni solo ed esclusivamente se decise in gruppo.
 
-3. DOVE E QUANDO INSERIRE I COMMENTI:
+3. **DOVE E QUANDO INSERIRE I COMMENTI:**
   - uno per definire classe o funzione al di sopra delle stesse;
   - laterale se corti;
   - accanto agli script in caso di necessità per spiegare l'algoritmo;
   - a più righe se il blocco è particolarmente complesso da leggere.
 
-4. CLEAN CODE:
+4. **CLEAN CODE:**
   - nomi delle variabili con underscore;
   - nomi delle Classi e delle funzioni in camelCase;
   - nomi che abbiano un significato coerente;
   - raggruppamento del codice in base al tipo (classi, funzioni, test, etc...).
   
-5. FEATURES DA IMPLEMENTARE:
+5. **FEATURES DA IMPLEMENTARE:**
   - possibilità di implementare più liste, ognuna con nome di riferimento o di categoria,
     con relativa data di scadenza e le diverse task all'interno;
   - inserimento di un alert per i giorni mancanti alla scadenza;
