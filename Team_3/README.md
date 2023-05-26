@@ -6,12 +6,12 @@
       <br>
 MEMBRI DEL TEAM 3: <br>
  -Franco Rinaldi - https://github.com/jalt1990 <br>
- -Carlo Schiano Di Cola - https://github.com/tbnh62 <br>
+ -Carlo Schiano di Cola - https://github.com/tbnh62 <br>
  -Monica Parmigiani - https://github.com/monicaparmigiani <br>
  -Giorgio Cappello - https://github.com/GiorgioCappello <br>
 
-**TEAMWORKING RIFERITO AD ANALISI E SVILUPPO
-DI APP GESTIONE TASK CON SERVIZI CRUD**
+**LAVORO DI GRUPPO RIFERITO AD ANALISI E SVILUPPO
+DI UN APPLICAZIONE GESTIONALE PER TASK CON SERVIZI CRUD**
 
 
 # REGOLE DI GRUPPO
@@ -25,39 +25,41 @@ DI APP GESTIONE TASK CON SERVIZI CRUD**
 
 2. **COMMIT ON GITHUB:**
   - pull a inizio lavoro, con file separati;
-  - push dei file personali sulla cartella condivisa ogni aggiornamento importante;
+  - push dei file personali sulla cartella condivisa ad ogni aggiornamento importante;
   - il teamleader, o chi per sua vece, ha l'onere di unire i file compositi;
-  - le cancellazioni solo ed esclusivamente se decise in gruppo.
+  - le cancellazioni avvengono solo ed esclusivamente se decise in gruppo.
 
 3. **DOVE E QUANDO INSERIRE I COMMENTI:**
-  - uno per definire classe o funzione al di sopra delle stesse;
-  - laterale se corti;
-  - accanto agli script in caso di necessità per spiegare l'algoritmo;
-  - a più righe se il blocco è particolarmente complesso da leggere.
+  - un commento esplicativo posizionato prima della definizione della classe o della funzione;
+  - commenti accanto agli script in caso di necessità per spiegare l'algoritmo;
+  - commenti multilinea se il blocco è particolarmente complesso da leggere.
 
 4. **CLEAN CODE:**
-  - nomi delle variabili con underscore;
-  - nomi delle Classi e delle funzioni in camelCase;
-  - nomi che abbiano un significato coerente;
+  - nomi delle variabili in snake_case;
+  - nomi delle Classi in upperCamelCase;
+  - nomi delle funzioni in snake_case;
+  - nomi delle variabili indicativi del loro contenuto;
   - raggruppamento del codice in base al tipo (classi, funzioni, test, etc...).
-  
-5. **FEATURES DA IMPLEMENTARE:**
+<br><br>
+
+**POSSIBILI FEATURE DA IMPLEMENTARE IN FUTURE RELEASE**
+
   - possibilità di implementare più liste, ognuna con nome di riferimento o di categoria,
     con relativa data di scadenza e le diverse task all'interno;
+  - visualizzazione del progressivo dell'esecuzione delle liste (in percentuale);
+  - ordinamento delle liste per priorità, scadenza, o status;
   - inserimento di un alert per i giorni mancanti alla scadenza;
   - inserimento di un filtro controllo per le task e le liste attive, mostrando anche una deadline;
   - inserimento di un filtro task scaduta/non scaduta;
   - inserimento di un sistema di comunicazione con app calendario esterne;
   - implentazione di funzione di import/export per file di backup;
-  - ordinamento delle liste per priorità, scadenza, o da completare;
-  - visualizzazione del progressivo dell'esecuzione delle liste (in percentuale);
   - gestione di più profili (nome utente e password).
 
 
 
 
 ____________________________________________________________
-MANUALE DI ISTRUZIONI - REALEASE 2.0
+**MANUALE DI ISTRUZIONI - REALEASE 2.0**
 ____________________________________________________________
 L'app si avvia dal menu di accesso (1)
 
