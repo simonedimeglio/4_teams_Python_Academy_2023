@@ -69,7 +69,11 @@ class Task:
         
     # Modifica di priorita (nella modifica parziale)
     def update_priorita(self, valore):
-        self.priorita = valore
+        # controlla che il valore sia nei valori concessi
+        if valore in ['Alta', 'Media', 'Bassa']:
+            self.priorita = valore
+        else:
+            print('Non è stato possibile modificare la priorità del task.')
 
     # Modifica del contenuto della task (nella modifica parziale)
     def update_contenuto(self, nuovo_contenuto):
@@ -150,7 +154,7 @@ def richiesta_data_e_ora():
 
 
 # funzione per aggiungere dettagli alle task:
-def aggiungiDettagliTask(task_creato):
+def aggiungi_dettagli_task(task_creato):
     while True:    
         print('Vuoi personalizzare la priorità?')
         risposta = input('Si/No: ')
@@ -177,7 +181,7 @@ def aggiungiDettagliTask(task_creato):
 def modifica_completa(x):
     contenuto = input('Inserisci il nuovo contenuto: ')
     data = richiesta_data_e_ora()
-    aggiungiDettagliTask(to_do_list.lista_task[x])
+    aggiungi_dettagli_task(to_do_list.lista_task[x])
     # modifico gli attributi contenuto, scadenza e priorita
     to_do_list.update(to_do_list.lista_task[x], contenuto, data)
     print('Hai aggiornato la task con successo.')
@@ -204,7 +208,7 @@ def aggiungi():
         else:
             data = richiesta_data_e_ora()
             task_creato = Task(contenuto,data)
-            aggiungiDettagliTask(task_creato)
+            aggiungi_dettagli_task(task_creato)
             to_do_list.create(task_creato)
             print('Hai inserito correttamente la task nella lista')
             break
@@ -306,7 +310,7 @@ def switch_modifica_parziale(x):
                 
         elif scelta_modifica2 == '3':
             # modifico priorita e stampo
-            aggiungiDettagliTask(to_do_list.lista_task[x])
+            aggiungi_dettagli_task(to_do_list.lista_task[x])
             print('Ti faccio rivisualizzare la task aggiornata:')
             print(str(x+1) + '.' + to_do_list.lista_task[x].to_string())
 
@@ -437,17 +441,11 @@ def switch_accesso():
 
 ############################## AREA DEMO ############################
 
-# inizializzazione degli oggetti Task demo 
+# inizializzazione dell' oggetto di lista task  
 task1 = Task('Esposizione App', '2023-05-25 09:00')
 task1.priorita = 'Alta'
 task2 = Task('Fare la spesa', '2023-05-25 18:15')
-
-# inizializzazione dell' oggetto di lista task  
-to_do_list = ListaTask() 
-
-# aggiunta delle task per la demo
+to_do_list = ListaTask()  
 to_do_list.lista_task = [task1, task2]
 
-
-# Avvio App
 switch_accesso()
