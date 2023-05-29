@@ -1,0 +1,77 @@
+lista_veicoli = []
+
+def switch():  
+    accensione = True
+
+    while accensione:
+        print("\nBenvenuto nel sistema")
+        print("1. Crea una moto")
+        print("2. Crea un auto")
+        print("3. Visualizza veicoli")
+        print("0. Esci")
+        scelta = input("Inserisci la tua scelta: ")
+        print()
+
+        if scelta == '0':
+            #richiesta uscita dal programma
+            accensione = False
+
+        elif scelta == '1':
+            #crea moto
+            marca = input('Inserisci marca moto: ')
+            modello = input('Inserisci modello moto: ')
+            oggetto_moto = Moto(marca,modello)
+            lista_veicoli.append(oggetto_moto)
+   
+
+
+
+        elif scelta == '2':
+            #crea auto
+            marca = input('Inserisci marca auto: ')
+            modello = input('Inserisci modello auto: ')
+            oggetto_auto = Auto(marca,modello)
+            lista_veicoli.append(oggetto_auto)
+
+        elif scelta == '3':
+            #crea auto
+            if lista_veicoli == []:
+               print("Non ci sono veicoli")
+            else:
+               for x in lista_veicoli:
+                   print(x.to_string())
+       
+       
+        else:
+            #opzione inesistente
+            print("Errore, l'opzione da te selezionata non esiste")
+
+
+
+
+
+class Veicolo:
+   
+    def __init__(self,marca, modello):
+        self.marca = marca
+        self.modello = modello
+    def to_string(self):
+        return f'Marca: {self.marca} | Modello: {self.modello}'
+
+
+class Auto(Veicolo):
+
+    def __init__(self, marca, modello):
+        super().__init__(marca, modello)
+    def to_string(self):
+        return f'Auto ' + super().to_string()
+
+
+class Moto(Veicolo):
+
+    def __init__(self, marca, modello):
+        super().__init__(marca, modello)
+    def to_string(self):
+        return f'Moto ' + super().to_string()
+   
+switch()
