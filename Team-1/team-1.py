@@ -25,9 +25,7 @@ class Entita:
     
     def prendi_danno(self, punti_vita_sottratti):
         #sottrae la vita in base al danno subito
-        self.punti_vita_correnti -= punti_vita_sottratti
-        if self.punti_vita_correnti < 0:
-            self.punti_vita_correnti = 0
+        self.punti_vita_correnti = max(self.punti_vita_correnti - punti_vita_sottratti, 0)
 
     def sconfitto(self):
         #ritorna se l'entità è stata sconfitta o meno in base ai punti vita rimasti
@@ -277,7 +275,7 @@ def switch():
             personaggio = crea_personaggio()
 
             #ingresso in menu di gioco
-            print (f"\nBENVENUTO {personaggio.nome}\n")
+            print(f"\nBENVENUTO {personaggio.nome}\n")
             switch_gioco(personaggio)
 
         else:
