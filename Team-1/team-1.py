@@ -171,6 +171,7 @@ class Strega(Entita):
             if nemico.livello > 1:
                 nemico.livello -= 2
                 nemico.aumenta_livello()
+                nemico.punti_vita_correnti = min(nemico.punti_vita_correnti, nemico.punti_vita)
                 return super().attiva_abilita(nemico) + f" - Il livello di {nemico.nome} è stato ridotto di uno.\n"
             else:
                 return f"Abilità non attivata, il livello di {nemico.nome} è troppo basso.\n"
@@ -423,9 +424,6 @@ def switch_combattimento(personaggio, nemico):
     turno = 0
 
     while not personaggio.sconfitto() and not nemico.sconfitto():
-        turno += 1
-        print(f"Turno {turno}\n")
-
         print("Benvenuto nel menu Combattimento. \nScegliere l'opzione desiderata")
         print("1. Combatti")
         print("2. Usa abilita")
@@ -448,7 +446,9 @@ def switch_combattimento(personaggio, nemico):
                 print("Sei tornato al menù combattimento\n")
            
             elif scelta == "1":
-                #esecuzione di un doppio turno di combattimentos
+                #esecuzione di un doppio turno di combattimento
+                turno += 1
+                print(f"Turno {turno}\n")
                 combattimento(personaggio, nemico, turno)
                 turno += 1
                 
@@ -525,9 +525,14 @@ def switch_combattimento(personaggio, nemico):
 
             if scelta == "1":
                 #fuga confermata
-                print("Hai scelto di fuggire, fuggi!\n")
-                break
-           
+                if personaggio.punti_esperienza_correnti >= 10:
+                    #la fuga è possibile solo se si hanno punti esperienza a sufficienza
+                    print("Hai scelto di fuggire, fuggi! Ti verranno detratti 10 XP.\n")
+                    personaggio.punti_esperienza_correnti -= 10
+                    break
+                else:
+                    print("Non puoi fuggire! Non hai punti esperienza a sufficienza.\n")
+                           
             elif scelta == "2":
                #fuga annullata
                print("Sei tornato al menù combattimento\n")
@@ -559,13 +564,12 @@ def switch_combattimento(personaggio, nemico):
     personaggio.rigenera_abilita() #rigeneriamo la possibilità di utilizzare l'abilità al prossimo combattimento
 
 def combattimento(personaggio, nemico, turno):
-
         #calcolo di attacco personaggio, difesa nemico e della loro differenza
         attacco = personaggio.attacca()
         difesa = nemico.difende()
         print(f"{personaggio.nome}: ATK -> {attacco}")
         print(f"Nemico: DEF -> {difesa}")
-        combattimento = attacco - difesa 
+        combattimento = attacco - difesa
 
         if combattimento > 0:
             #attacco efficace, sottraggo la vita al nemico
@@ -575,21 +579,22 @@ def combattimento(personaggio, nemico, turno):
             #attacco non efficace
             print(f"{personaggio.nome}: l'attacco era troppo debole")
 
-        print(f"\nTurno {turno + 1}\n")
+        if not nemico.sconfitto():
+            print(f"\nTurno {turno + 1}\n")
 
-        attacco = nemico.attacca()
-        difesa = personaggio.difende()
-        print(f"Nemico: ATK -> {attacco}")
-        print(f"{personaggio.nome}: DEF -> {difesa}")
-        combattimento = attacco - difesa 
+            attacco = nemico.attacca()
+            difesa = personaggio.difende()
+            print(f"Nemico: ATK -> {attacco}")
+            print(f"{personaggio.nome}: DEF -> {difesa}")
+            combattimento = attacco - difesa
 
-        if combattimento > 0:
-            #attacco efficace, sottraggo vita al personaggio
-            print(f"Nemico: datto inflitto -> {combattimento}")
-            personaggio.prendi_danno(combattimento)
-        else:
-            #attacco non efficace
-            print("Nemico: l'attacco era troppo debole\n")
+            if combattimento > 0:
+                #attacco efficace, sottraggo vita al personaggio
+                print(f"Nemico: datto inflitto -> {combattimento}")
+                personaggio.prendi_danno(combattimento)
+            else:
+                #attacco non efficace
+                print("Nemico: l'attacco era troppo debole\n")
 
         #recap stato corrente di personaggio e nemico
         print(personaggio.stampa_stato())
